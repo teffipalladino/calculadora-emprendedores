@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora para Emprendedores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 0 15px;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      color: #2a7a4a;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 1em;
+    }
+    button {
+      background-color: #2a7a4a;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #24663d;
+    }
+    #resultado {
+      margin-top: 25px;
+      padding: 15px;
+      background: #d4f4d4;
+      border: 1px solid #2a7a4a;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Calculadora para Emprendedores</h1>
+
+  <form id="calcForm">
+    <label for="costo">Costo total (en $):</label>
+    <input type="number" id="costo" min="0" step="any" required />
+
+    <label for="precio">Precio de venta (en $):</label>
+    <input type="number" id="precio" min="0" step="any" required />
+
+    <label for="unidades">Cantidad estimada a vender:</label>
+    <input type="number" id="unidades" min="1" step="1" required />
+
+    <button type="submit">Calcular ganancia</button>
+  </form>
+
+  <div id="resultado" style="display:none;"></div>
+
+  <script>
+    const form = document.getElementById('calcForm');
+    const resultado = document.getElementById('resultado');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const costo = parseFloat(document.getElementById('costo').value);
+      const precio = parseFloat(document.getElementById('precio').value);
+      const unidades = parseInt(document.getElementById('unidades').value);
+
+      if (precio <= costo) {
+        resultado.style.display = 'block';
+        resultado.style.color = 'red';
+        resultado.textContent = 'El precio de venta debe ser mayor que el costo para generar ganancia.';
+        return;
+      }
+
+      const gananciaPorUnidad = precio - costo;
+      const gananciaTotal = gananciaPorUnidad * unidades;
+
+      resultado.style.display = 'block';
+      resultado.style.color = 'black';
+      resultado.textContent = `Ganancia total estimada: $${gananciaTotal.toFixed(2)}`;
+    });
+  </script>
+
+</body>
+</html>
