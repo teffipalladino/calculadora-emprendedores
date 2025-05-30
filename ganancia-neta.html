@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganancia Neta</title>
+</head>
+<body>
+  <a href="index.html">← Volver al inicio</a>
+  <h1>Calculadora de Ganancia Neta</h1>
+
+  <form>
+    <label>Precio de venta: <input type="number" id="venta" /></label><br />
+    <label>Costo: <input type="number" id="costo" /></label><br />
+    <button type="button" onclick="calcularGanancia()">Calcular</button>
+  </form>
+
+  <p id="resultado"></p>
+
+  <script>
+    function calcularGanancia() {
+      const venta = parseFloat(document.getElementById("venta").value);
+      const costo = parseFloat(document.getElementById("costo").value);
+      if (isNaN(venta) || isNaN(costo)) {
+        document.getElementById("resultado").innerText = "Por favor completá ambos campos.";
+        return;
+      }
+      const ganancia = venta - costo;
+      document.getElementById("resultado").innerText = `Ganancia neta: $${ganancia}`;
+    }
+  </script>
+</body>
+</html>
