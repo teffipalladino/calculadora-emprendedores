@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora de Venta Objetivo</title>
+</head>
+<body>
+  <a href="index.html">← Volver al inicio</a>
+  <h1>¿Cuánto tengo que vender para ganar X por mes?</h1>
+
+  <form>
+    <label>Precio de venta por unidad: <input type="number" id="precio" /></label><br />
+    <label>Costo variable por unidad: <input type="number" id="costo" /></label><br />
+    <label>Costos fijos mensuales: <input type="number" id="costosFijos" /></label><br />
+    <label>Ganancia neta deseada por mes: <input type="number" id="gananciaDeseada" /></label><br />
+    <button type="button" onclick="calcularVentas()">Calcular</button>
+  </form>
+
+  <p id="resultado"></p>
+
+  <script>
+    function calcularVentas() {
+      const precio = parseFloat(document.getElementById("precio").value);
+      const costo = parseFloat(document.getElementById("costo").value);
+      const costosFijos = parseFloat(document.getElementById("costosFijos").value);
+      const gananciaDeseada = parseFloat(document.getElementById("gananciaDeseada").value);
+
+      if ([precio, costo, costosFijos, gananciaDeseada].some(v => isNaN(v) || v < 0)) {
+        document.getElementById("resultado").innerText = "Por favor, completá todos los campos con valores válidos.";
+        return;
+      }
+      if (precio <= costo) {
+        document.getElementById("resultado").innerText = "El precio de venta debe ser mayor que el costo variable por unidad.";
+        return;
+      }
+
+      // Fórmula: unidades = (costos fijos + ganancia deseada) / (precio - costo variable)
+      const unidades = (costosFijos + gananciaDeseada) / (precio - costo);
+      const unidadesRedondeadas = Math.ceil(unidades);
+
+      document.getElementById("resultado").innerText = `Debés vender al menos ${unidadesRedondeadas} unidades para ganar $${gananciaDeseada} al mes.`;
+    }
+  </script>
+</body>
+</html>
