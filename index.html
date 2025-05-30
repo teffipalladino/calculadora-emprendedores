@@ -2,159 +2,146 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Calculadora para Emprendedores</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora para emprendedores</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: sans-serif;
       max-width: 600px;
-      margin: 30px auto;
-      padding: 0 15px;
-      background: #f9f9f9;
+      margin: auto;
+      padding: 2rem;
+      background-color: #f6f6f6;
     }
-    h1 {
-      text-align: center;
-      color: #2a7a4a;
+    section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     label {
       display: block;
-      margin-top: 15px;
-      font-weight: bold;
+      margin-top: 10px;
     }
-    input, button {
+    input {
       width: 100%;
-      padding: 10px;
+      padding: 8px;
       margin-top: 5px;
-      font-size: 1em;
     }
     button {
-      background-color: #2a7a4a;
+      margin-top: 15px;
+      padding: 10px 15px;
+      background-color: #00695c;
       color: white;
       border: none;
+      border-radius: 6px;
       cursor: pointer;
-      margin-top: 20px;
     }
     button:hover {
-      background-color: #24663d;
+      background-color: #004d40;
     }
-    #resultado {
-      margin-top: 25px;
+    #resultado, #resultadoPerdidasGanancias {
+      margin-top: 20px;
       padding: 15px;
-      background: #d4f4d4;
-      border: 1px solid #2a7a4a;
-      font-weight: bold;
+      background: #e0f7fa;
+      border: 1px solid #00796b;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
 
-  <h1>Calculadora para Emprendedores</h1>
+  <h1>Calculadora para emprendedores</h1>
 
-  <form id="calcForm">
-    <label for="costo">Costo total (en $):</label>
-    <input type="number" id="costo" min="0" step="any" required />
+  <!-- CALCULADORA BÁSICA DE PRECIO DE VENTA -->
+  <section>
+    <h2>Calculadora de precio de venta</h2>
+    <form id="formulario">
+      <label for="costo">Costo unitario (en $):</label>
+      <input type="number" id="costo" min="0" step="any" required>
 
-    <label for="precio">Precio de venta (en $):</label>
-    <input type="number" id="precio" min="0" step="any" required />
+      <label for="margen">Margen deseado (%):</label>
+      <input type="number" id="margen" min="0" step="any" required>
 
-    <label for="unidades">Cantidad estimada a vender:</label>
-    <input type="number" id="unidades" min="1" step="1" required />
+      <button type="submit">Calcular precio de venta</button>
+    </form>
 
-    <button type="submit">Calcular ganancia</button>
-  </form>
+    <div id="resultado" style="display:none;"></div>
+  </section>
 
-  <div id="resultado" style="display:none;"></div>
+  <!-- CALCULADORA DE PÉRDIDAS Y GANANCIAS -->
+  <section>
+    <h2>Calculadora de pérdidas y ganancias</h2>
 
+    <form id="perdidasGananciasForm">
+      <label for="costoTotal">Costo total (en $):</label>
+      <input type="number" id="costoTotal" min="0" step="any" required />
+
+      <label for="precioVenta">Precio de venta (en $):</label>
+      <input type="number" id="precioVenta" min="0" step="any" required />
+
+      <label for="cantidadVendida">Cantidad vendida:</label>
+      <input type="number" id="cantidadVendida" min="0" step="1" required />
+
+      <label for="gastosFijos">Gastos fijos mensuales (en $):</label>
+      <input type="number" id="gastosFijos" min="0" step="any" required />
+
+      <label for="gastosVariables">Gastos variables por unidad (en $):</label>
+      <input type="number" id="gastosVariables" min="0" step="any" required />
+
+      <button type="submit">Calcular resultado</button>
+    </form>
+
+    <div id="resultadoPerdidasGanancias" style="display:none;"></div>
+  </section>
+
+  <!-- SCRIPTS -->
   <script>
-    const form = document.getElementById('calcForm');
-    const resultado = document.getElementById('resultado');
+    // CALCULADORA DE PRECIO DE VENTA
+    const formulario = document.getElementById("formulario");
+    const resultado = document.getElementById("resultado");
 
-    form.addEventListener('submit', function(event) {
+    formulario.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const costo = parseFloat(document.getElementById("costo").value);
+      const margen = parseFloat(document.getElementById("margen").value);
+      const precioVenta = costo * (1 + margen / 100);
+
+      resultado.textContent = `El precio de venta sugerido es $${precioVenta.toFixed(2)}`;
+      resultado.style.display = "block";
+    });
+
+    // CALCULADORA DE PÉRDIDAS Y GANANCIAS
+    const formPG = document.getElementById('perdidasGananciasForm');
+    const resultadoPG = document.getElementById('resultadoPerdidasGanancias');
+
+    formPG.addEventListener('submit', function(event) {
       event.preventDefault();
 
-      const costo = parseFloat(document.getElementById('costo').value);
-      const precio = parseFloat(document.getElementById('precio').value);
-      const unidades = parseInt(document.getElementById('unidades').value);
+      const costoTotal = parseFloat(document.getElementById('costoTotal').value);
+      const precioVenta = parseFloat(document.getElementById('precioVenta').value);
+      const cantidadVendida = parseInt(document.getElementById('cantidadVendida').value);
+      const gastosFijos = parseFloat(document.getElementById('gastosFijos').value);
+      const gastosVariables = parseFloat(document.getElementById('gastosVariables').value);
 
-      if (precio <= costo) {
-        resultado.style.display = 'block';
-        resultado.style.color = 'red';
-        resultado.textContent = 'El precio de venta debe ser mayor que el costo para generar ganancia.';
-        return;
+      const ingresos = precioVenta * cantidadVendida;
+      const costosVariablesTotales = gastosVariables * cantidadVendida;
+      const costosTotales = costoTotal + gastosFijos + costosVariablesTotales;
+      const gananciaNeta = ingresos - costosTotales;
+
+      let mensaje = `Ingresos totales: $${ingresos.toFixed(2)}<br>`;
+      mensaje += `Costos totales: $${costosTotales.toFixed(2)}<br>`;
+
+      if (gananciaNeta >= 0) {
+        mensaje += `<strong>Ganancia neta: $${gananciaNeta.toFixed(2)}</strong>`;
+      } else {
+        mensaje += `<strong style="color:red;">Pérdida neta: $${Math.abs(gananciaNeta).toFixed(2)}</strong>`;
       }
 
-      const gananciaPorUnidad = precio - costo;
-      const gananciaTotal = gananciaPorUnidad * unidades;
-
-      resultado.style.display = 'block';
-      resultado.style.color = 'black';
-      resultado.textContent = `Ganancia total estimada: $${gananciaTotal.toFixed(2)}`;
+      resultadoPG.innerHTML = mensaje;
+      resultadoPG.style.display = 'block';
     });
   </script>
 
 </body>
 </html>
-<!-- Agregamos esta nueva sección justo después del formulario básico que ya tenés -->
-
-<h2>Calculadora de pérdidas y ganancias</h2>
-
-<form id="perdidasGananciasForm">
-  <label for="costoTotal">Costo total (en $):</label>
-  <input type="number" id="costoTotal" min="0" step="any" required />
-
-  <label for="precioVenta">Precio de venta (en $):</label>
-  <input type="number" id="precioVenta" min="0" step="any" required />
-
-  <label for="cantidadVendida">Cantidad vendida:</label>
-  <input type="number" id="cantidadVendida" min="0" step="1" required />
-
-  <label for="gastosFijos">Gastos fijos mensuales (en $):</label>
-  <input type="number" id="gastosFijos" min="0" step="any" required />
-
-  <label for="gastosVariables">Gastos variables por unidad (en $):</label>
-  <input type="number" id="gastosVariables" min="0" step="any" required />
-
-  <button type="submit">Calcular resultado</button>
-</form>
-
-<div id="resultadoPerdidasGanancias" style="display:none; margin-top: 20px; padding: 15px; background:#e0f7fa; border:1px solid #00796b;"></div>
-
-<script>
-  const formPG = document.getElementById('perdidasGananciasForm');
-  const resultadoPG = document.getElementById('resultadoPerdidasGanancias');
-
-  formPG.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const costoTotal = parseFloat(document.getElementById('costoTotal').value);
-    const precioVenta = parseFloat(document.getElementById('precioVenta').value);
-    const cantidadVendida = parseInt(document.getElementById('cantidadVendida').value);
-    const gastosFijos = parseFloat(document.getElementById('gastosFijos').value);
-    const gastosVariables = parseFloat(document.getElementById('gastosVariables').value);
-
-    // Calculamos ingresos totales
-    const ingresos = precioVenta * cantidadVendida;
-
-    // Costos variables totales
-    const costosVariablesTotales = gastosVariables * cantidadVendida;
-
-    // Costos totales: costo total + gastos fijos + costos variables
-    const costosTotales = costoTotal + gastosFijos + costosVariablesTotales;
-
-    // Ganancia neta = ingresos - costos totales
-    const gananciaNeta = ingresos - costosTotales;
-
-    // Mostrar resultados
-    let mensaje = `Ingresos totales: $${ingresos.toFixed(2)}<br>`;
-    mensaje += `Costos totales: $${costosTotales.toFixed(2)}<br>`;
-
-    if (gananciaNeta >= 0) {
-      mensaje += `<strong>Ganancia neta: $${gananciaNeta.toFixed(2)}</strong>`;
-    } else {
-      mensaje += `<strong style="color:red;">Pérdida neta: $${Math.abs(gananciaNeta).toFixed(2)}</strong>`;
-    }
-
-    resultadoPG.innerHTML = mensaje;
-    resultadoPG.style.display = 'block';
-  });
-</script>
