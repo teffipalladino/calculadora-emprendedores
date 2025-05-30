@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Recomendador de Precio</title>
+</head>
+<body>
+  <h1>Calculadora: Precio Recomendado</h1>
+  <p>Ingresá el costo y el margen deseado para conocer el precio recomendado de venta.</p>
+
+  <form id="formularioPrecio">
+    <label for="costo">Costo del producto ($):</label><br>
+    <input type="number" id="costo" step="0.01" required><br><br>
+
+    <label for="margen">Margen deseado (%):</label><br>
+    <input type="number" id="margen" step="0.1" required><br><br>
+
+    <button type="submit">Calcular precio</button>
+  </form>
+
+  <h2 id="resultado"></h2>
+
+  <script>
+    document.getElementById("formularioPrecio").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const costo = parseFloat(document.getElementById("costo").value);
+      const margen = parseFloat(document.getElementById("margen").value);
+
+      if (!isNaN(costo) && !isNaN(margen)) {
+        const precio = costo * (1 + margen / 100);
+        document.getElementById("resultado").innerText = `💡 Precio recomendado: $${precio.toFixed(2)}`;
+      } else {
+        document.getElementById("resultado").innerText = "Por favor, ingresá los valores correctamente.";
+      }
+    });
+  </script>
+</body>
+</html>
