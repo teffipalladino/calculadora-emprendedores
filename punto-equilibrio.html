@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Punto de Equilibrio</title>
+</head>
+<body>
+  <h1>Calculadora de Punto de Equilibrio</h1>
+  <p>Calculá cuántas unidades necesitás vender para cubrir todos tus costos.</p>
+
+  <form id="formEquilibrio">
+    <label for="costosFijos">Costos fijos mensuales ($):</label><br>
+    <input type="number" id="costosFijos" required><br><br>
+
+    <label for="precioVenta">Precio de venta por unidad ($):</label><br>
+    <input type="number" id="precioVenta" required><br><br>
+
+    <label for="costoVariable">Costo variable por unidad ($):</label><br>
+    <input type="number" id="costoVariable" required><br><br>
+
+    <button type="submit">Calcular</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    document.getElementById("formEquilibrio").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const costosFijos = parseFloat(document.getElementById("costosFijos").value);
+      const precioVenta = parseFloat(document.getElementById("precioVenta").value);
+      const costoVariable = parseFloat(document.getElementById("costoVariable").value);
+
+      const margenContribucion = precioVenta - costoVariable;
+      const puntoEquilibrio = costosFijos / margenContribucion;
+
+      const resultadoHTML = `
+        <h2>Resultado</h2>
+        <p>Necesitás vender <strong>${Math.ceil(puntoEquilibrio)}</strong> unidades por mes para cubrir tus costos.</p>
+      `;
+
+      document.getElementById("resultado").innerHTML = resultadoHTML;
+    });
+  </script>
+</body>
+</html>
