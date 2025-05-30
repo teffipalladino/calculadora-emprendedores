@@ -2,94 +2,102 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calculadora de Ganancia Neta</title>
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-  <style>
-    /* ✅ Fondo celeste específico */
-    section.wrapper {
-      background-color: #52cbee;
-    }
 
-    /* ✅ Input con texto negro */
-    input[type="number"] {
+  <!-- Estilos del tema Forty -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body {
+      background-color: #52cbee !important;
+    }
+    form {
+      max-width: 400px;
+      margin: 3rem auto;
+      background: #ffffffcc;
+      padding: 2rem;
+      border-radius: 12px;
+    }
+    label {
+      display: block;
+      margin-bottom: 1rem;
+      color: #000;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
       color: #000;
       background-color: #fff;
     }
-
-    /* Opcional: resultado también en negro para contrastar */
+    button {
+      margin-top: 1rem;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #333;
+    }
     #resultado {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
       color: #000;
+      text-align: center;
+    }
+    a {
+      display: block;
+      margin: 1rem auto;
+      text-align: center;
+      color: #fff;
+    }
+    h1 {
+      text-align: center;
+      color: #fff;
+      margin-top: 2rem;
     }
   </style>
 </head>
-<body class="is-preload">
 
-  <!-- Header -->
-  <header id="header">
-    <a href="index.html" class="logo">← Volver al inicio</a>
-  </header>
+<body>
+  <a href="index.html">← Volver al inicio</a>
+  <h1>Calculadora de Ganancia Neta</h1>
 
-  <!-- Main -->
-  <section id="main" class="wrapper">
-    <div class="inner">
-      <header class="major">
-        <h2>Calculadora de Ganancia Neta</h2>
-        <p>Completá los campos para conocer tu ganancia.</p>
-      </header>
+  <form>
+    <label>Precio de venta: <input type="number" id="venta" /></label>
+    <label>Costo: <input type="number" id="costo" /></label>
+    <button type="button" onclick="calcularGanancia()">Calcular</button>
+  </form>
 
-      <form>
-        <div class="row gtr-uniform">
-          <div class="col-6 col-12-xsmall">
-            <label for="venta">Precio de venta</label>
-            <input type="number" id="venta" name="venta" placeholder="$" />
-          </div>
-          <div class="col-6 col-12-xsmall">
-            <label for="costo">Costo</label>
-            <input type="number" id="costo" name="costo" placeholder="$" />
-          </div>
-          <div class="col-12">
-            <ul class="actions">
-              <li><input type="button" value="Calcular" class="primary" onclick="calcularGanancia()" /></li>
-            </ul>
-          </div>
-        </div>
-      </form>
+  <p id="resultado"></p>
 
-      <p id="resultado" style="font-weight: bold; margin-top: 1em;"></p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="footer">
-    <div class="inner">
-      <p>Hecho con amor por Teffi Palladino</p>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
+  <!-- Scripts del tema Forty -->
   <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/jquery.scrollex.min.js"></script>
   <script src="assets/js/jquery.scrolly.min.js"></script>
+  <script src="assets/js/jquery.scrollex.min.js"></script>
   <script src="assets/js/browser.min.js"></script>
   <script src="assets/js/breakpoints.min.js"></script>
   <script src="assets/js/util.js"></script>
   <script src="assets/js/main.js"></script>
 
-  <!-- Calculadora -->
   <script>
     function calcularGanancia() {
       const venta = parseFloat(document.getElementById("venta").value);
       const costo = parseFloat(document.getElementById("costo").value);
+      const resultado = document.getElementById("resultado");
+
       if (isNaN(venta) || isNaN(costo)) {
-        document.getElementById("resultado").innerText = "Por favor completá ambos campos.";
+        resultado.innerText = "Por favor completá ambos campos.";
         return;
       }
+
       const ganancia = venta - costo;
-      document.getElementById("resultado").innerText = `Ganancia neta: $${ganancia.toFixed(2)}`;
+      resultado.innerText = `Ganancia neta: $${ganancia.toFixed(2)}`;
     }
   </script>
-
 </body>
 </html>
