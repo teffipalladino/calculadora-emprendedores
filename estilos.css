@@ -1,8 +1,47 @@
-body.venta-objetivo {
-  background-color: #E5F9F5;
-  color: #222;
+/* Estilos generales para todas las calculadoras */
+body {
   font-family: 'Poppins', sans-serif;
   padding: 20px;
+  color: #222;
+}
+
+label,
+input,
+button,
+#resultado {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+button {
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 400;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+/* === Calculadora Venta Objetivo === */
+body.venta-objetivo {
+  background-color: #E5F9F5;
 }
 
 body.venta-objetivo h1 {
@@ -12,45 +51,19 @@ body.venta-objetivo h1 {
 
 body.venta-objetivo a {
   color: #007F6B;
-  text-decoration: none;
-  font-weight: 400;
-}
-
-body.venta-objetivo label,
-body.venta-objetivo input,
-body.venta-objetivo button,
-body.venta-objetivo #resultado {
-  display: block;
-  margin-bottom: 10px;
-}
-
-body.venta-objetivo input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
-  max-width: 300px;
 }
 
 body.venta-objetivo button {
   background-color: #007F6B;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 body.venta-objetivo button:hover {
   background-color: #005F50;
 }
+
+/* === Calculadora Ganancia Neta === */
 body.ganancia-neta {
   background-color: #FFF6E5;
-  color: #222;
-  font-family: 'Poppins', sans-serif;
-  padding: 20px;
 }
 
 body.ganancia-neta h1 {
@@ -60,45 +73,19 @@ body.ganancia-neta h1 {
 
 body.ganancia-neta a {
   color: #D97E00;
-  text-decoration: none;
-  font-weight: 400;
-}
-
-body.ganancia-neta label,
-body.ganancia-neta input,
-body.ganancia-neta button,
-body.ganancia-neta #resultado {
-  display: block;
-  margin-bottom: 10px;
-}
-
-body.ganancia-neta input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
-  max-width: 300px;
 }
 
 body.ganancia-neta button {
   background-color: #D97E00;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 body.ganancia-neta button:hover {
   background-color: #A65E00;
 }
+
+/* === Calculadora Pérdidas y Ganancias === */
 body.perdidas-ganancias {
   background-color: #FCE8F3;
-  color: #222;
-  font-family: 'Poppins', sans-serif;
-  padding: 20px;
 }
 
 body.perdidas-ganancias h1 {
@@ -108,45 +95,19 @@ body.perdidas-ganancias h1 {
 
 body.perdidas-ganancias a {
   color: #B3006F;
-  text-decoration: none;
-  font-weight: 400;
-}
-
-body.perdidas-ganancias label,
-body.perdidas-ganancias input,
-body.perdidas-ganancias button,
-body.perdidas-ganancias #resultado {
-  display: block;
-  margin-bottom: 10px;
-}
-
-body.perdidas-ganancias input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
-  max-width: 300px;
 }
 
 body.perdidas-ganancias button {
   background-color: #B3006F;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 body.perdidas-ganancias button:hover {
   background-color: #80004D;
 }
+
+/* === Calculadora Descuento Mínimo === */
 body.descuento-minimo {
   background-color: #EAF1FF;
-  color: #222;
-  font-family: 'Poppins', sans-serif;
-  padding: 20px;
 }
 
 body.descuento-minimo h1 {
@@ -156,37 +117,12 @@ body.descuento-minimo h1 {
 
 body.descuento-minimo a {
   color: #0055CC;
-  text-decoration: none;
-  font-weight: 400;
-}
-
-body.descuento-minimo label,
-body.descuento-minimo input,
-body.descuento-minimo button,
-body.descuento-minimo #resultado {
-  display: block;
-  margin-bottom: 10px;
-}
-
-body.descuento-minimo input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
-  max-width: 300px;
 }
 
 body.descuento-minimo button {
   background-color: #0055CC;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 body.descuento-minimo button:hover {
-  background-color: #003C99;
+  background-color: #003d99;
 }
