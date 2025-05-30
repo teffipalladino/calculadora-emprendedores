@@ -3,145 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calculadora para emprendedores</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      max-width: 600px;
-      margin: auto;
-      padding: 2rem;
-      background-color: #f6f6f6;
-    }
-    section {
-      margin-bottom: 40px;
-      padding: 20px;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-    }
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-    }
-    button {
-      margin-top: 15px;
-      padding: 10px 15px;
-      background-color: #00695c;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #004d40;
-    }
-    #resultado, #resultadoPerdidasGanancias {
-      margin-top: 20px;
-      padding: 15px;
-      background: #e0f7fa;
-      border: 1px solid #00796b;
-      border-radius: 8px;
-    }
-  </style>
+  <title>Calculadora para Emprendedores</title>
 </head>
 <body>
+  <h1>Calculadora para Emprendedores</h1>
+  <p>Elegí la herramienta que necesitás 👇</p>
 
-  <h1>Calculadora para emprendedores</h1>
-
-  <!-- CALCULADORA BÁSICA DE PRECIO DE VENTA -->
-  <section>
-    <h2>Calculadora de precio de venta</h2>
-    <form id="formulario">
-      <label for="costo">Costo unitario (en $):</label>
-      <input type="number" id="costo" min="0" step="any" required>
-
-      <label for="margen">Margen deseado (%):</label>
-      <input type="number" id="margen" min="0" step="any" required>
-
-      <button type="submit">Calcular precio de venta</button>
-    </form>
-
-    <div id="resultado" style="display:none;"></div>
-  </section>
-
-  <!-- CALCULADORA DE PÉRDIDAS Y GANANCIAS -->
-  <section>
-    <h2>Calculadora de pérdidas y ganancias</h2>
-
-    <form id="perdidasGananciasForm">
-      <label for="costoTotal">Costo total (en $):</label>
-      <input type="number" id="costoTotal" min="0" step="any" required />
-
-      <label for="precioVenta">Precio de venta (en $):</label>
-      <input type="number" id="precioVenta" min="0" step="any" required />
-
-      <label for="cantidadVendida">Cantidad vendida:</label>
-      <input type="number" id="cantidadVendida" min="0" step="1" required />
-
-      <label for="gastosFijos">Gastos fijos mensuales (en $):</label>
-      <input type="number" id="gastosFijos" min="0" step="any" required />
-
-      <label for="gastosVariables">Gastos variables por unidad (en $):</label>
-      <input type="number" id="gastosVariables" min="0" step="any" required />
-
-      <button type="submit">Calcular resultado</button>
-    </form>
-
-    <div id="resultadoPerdidasGanancias" style="display:none;"></div>
-  </section>
-
-  <!-- SCRIPTS -->
-  <script>
-    // CALCULADORA DE PRECIO DE VENTA
-    const formulario = document.getElementById("formulario");
-    const resultado = document.getElementById("resultado");
-
-    formulario.addEventListener("submit", function(event) {
-      event.preventDefault();
-      const costo = parseFloat(document.getElementById("costo").value);
-      const margen = parseFloat(document.getElementById("margen").value);
-      const precioVenta = costo * (1 + margen / 100);
-
-      resultado.textContent = `El precio de venta sugerido es $${precioVenta.toFixed(2)}`;
-      resultado.style.display = "block";
-    });
-
-    // CALCULADORA DE PÉRDIDAS Y GANANCIAS
-    const formPG = document.getElementById('perdidasGananciasForm');
-    const resultadoPG = document.getElementById('resultadoPerdidasGanancias');
-
-    formPG.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const costoTotal = parseFloat(document.getElementById('costoTotal').value);
-      const precioVenta = parseFloat(document.getElementById('precioVenta').value);
-      const cantidadVendida = parseInt(document.getElementById('cantidadVendida').value);
-      const gastosFijos = parseFloat(document.getElementById('gastosFijos').value);
-      const gastosVariables = parseFloat(document.getElementById('gastosVariables').value);
-
-      const ingresos = precioVenta * cantidadVendida;
-      const costosVariablesTotales = gastosVariables * cantidadVendida;
-      const costosTotales = costoTotal + gastosFijos + costosVariablesTotales;
-      const gananciaNeta = ingresos - costosTotales;
-
-      let mensaje = `Ingresos totales: $${ingresos.toFixed(2)}<br>`;
-      mensaje += `Costos totales: $${costosTotales.toFixed(2)}<br>`;
-
-      if (gananciaNeta >= 0) {
-        mensaje += `<strong>Ganancia neta: $${gananciaNeta.toFixed(2)}</strong>`;
-      } else {
-        mensaje += `<strong style="color:red;">Pérdida neta: $${Math.abs(gananciaNeta).toFixed(2)}</strong>`;
-      }
-
-      resultadoPG.innerHTML = mensaje;
-      resultadoPG.style.display = 'block';
-    });
-  </script>
-
+  <ul>
+    <li><a href="ganancia-neta.html">Calculadora de Ganancia Neta</a></li>
+    <li><a href="perdidas-ganancias.html">Calculadora de Pérdidas y Ganancias</a></li>
+    <!-- Agregá más links a medida que sumás calculadoras -->
+  </ul>
 </body>
 </html>
