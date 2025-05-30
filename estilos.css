@@ -1,66 +1,192 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f5fdf7;
-  color: #333;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-}
-
-header {
-  background-color: #3ca86c;
-  color: white;
+body.venta-objetivo {
+  background-color: #E5F9F5;
+  color: #222;
+  font-family: 'Poppins', sans-serif;
   padding: 20px;
-  text-align: center;
 }
 
-h1, h2 {
-  color: #2b7a4b;
+body.venta-objetivo h1 {
+  color: #007F6B;
+  font-weight: 600;
 }
 
-main {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 0 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+body.venta-objetivo a {
+  color: #007F6B;
+  text-decoration: none;
+  font-weight: 400;
 }
 
-form input, form button {
+body.venta-objetivo label,
+body.venta-objetivo input,
+body.venta-objetivo button,
+body.venta-objetivo #resultado {
   display: block;
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  font-size: 1em;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 
-form button {
-  background-color: #3ca86c;
+body.venta-objetivo input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 300px;
+}
+
+body.venta-objetivo button {
+  background-color: #007F6B;
   color: white;
   border: none;
-  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-form button:hover {
-  background-color: #328c58;
+body.venta-objetivo button:hover {
+  background-color: #005F50;
+}
+body.ganancia-neta {
+  background-color: #FFF6E5;
+  color: #222;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
 }
 
-a {
-  color: #2b7a4b;
+body.ganancia-neta h1 {
+  color: #D97E00;
+  font-weight: 600;
+}
+
+body.ganancia-neta a {
+  color: #D97E00;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 400;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+body.ganancia-neta label,
+body.ganancia-neta input,
+body.ganancia-neta button,
+body.ganancia-neta #resultado {
+  display: block;
+  margin-bottom: 10px;
 }
 
-li {
-  margin: 10px 0;
+body.ganancia-neta input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 300px;
+}
+
+body.ganancia-neta button {
+  background-color: #D97E00;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+body.ganancia-neta button:hover {
+  background-color: #A65E00;
+}
+body.perdidas-ganancias {
+  background-color: #FCE8F3;
+  color: #222;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+}
+
+body.perdidas-ganancias h1 {
+  color: #B3006F;
+  font-weight: 600;
+}
+
+body.perdidas-ganancias a {
+  color: #B3006F;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+body.perdidas-ganancias label,
+body.perdidas-ganancias input,
+body.perdidas-ganancias button,
+body.perdidas-ganancias #resultado {
+  display: block;
+  margin-bottom: 10px;
+}
+
+body.perdidas-ganancias input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 300px;
+}
+
+body.perdidas-ganancias button {
+  background-color: #B3006F;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+body.perdidas-ganancias button:hover {
+  background-color: #80004D;
+}
+body.descuento-minimo {
+  background-color: #EAF1FF;
+  color: #222;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+}
+
+body.descuento-minimo h1 {
+  color: #0055CC;
+  font-weight: 600;
+}
+
+body.descuento-minimo a {
+  color: #0055CC;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+body.descuento-minimo label,
+body.descuento-minimo input,
+body.descuento-minimo button,
+body.descuento-minimo #resultado {
+  display: block;
+  margin-bottom: 10px;
+}
+
+body.descuento-minimo input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 300px;
+}
+
+body.descuento-minimo button {
+  background-color: #0055CC;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+body.descuento-minimo button:hover {
+  background-color: #003C99;
 }
