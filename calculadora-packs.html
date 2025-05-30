@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Packs y Promociones</title>
+</head>
+<body>
+  <h1>Calculadora de Promociones</h1>
+  <p>Simulá cómo afecta una promo a tu ganancia por producto.</p>
+
+  <form id="formPromo">
+    <label for="precio">Precio por unidad ($):</label><br>
+    <input type="number" id="precio" required><br><br>
+
+    <label for="promo">Tipo de promoción:</label><br>
+    <select id="promo" required>
+      <option value="2x1">2x1</option>
+      <option value="3x2">3x2</option>
+      <option value="2da70">2da unidad al 70%</option>
+    </select><br><br>
+
+    <button type="submit">Calcular</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    document.getElementById("formPromo").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const precio = parseFloat(document.getElementById("precio").value);
+      const promo = document.getElementById("promo").value;
+      let total = 0;
+      let unidades = 0;
+
+      if (promo === "2x1") {
+        total = precio;
+        unidades = 2;
+      } else if (promo === "3x2") {
+        total = precio * 2;
+        unidades = 3;
+      } else if (promo === "2da70") {
+        total = precio + (precio * 0.3);
+        unidades = 2;
+      }
+
+      const promedio = total / unidades;
+
+      const resultadoHTML = `
+        <h2>Resultado</h2>
+        <p>Total a cobrar por el pack: $${total.toFixed(2)}</p>
+        <p>Precio promedio por unidad: $${promedio.toFixed(2)}</p>
+      `;
+
+      document.getElementById("resultado").innerHTML = resultadoHTML;
+    });
+  </script>
+</body>
+</html>
