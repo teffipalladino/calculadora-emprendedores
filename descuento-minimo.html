@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Descuento Mínimo Posible</title>
+</head>
+<body>
+  <a href="index.html">← Volver al inicio</a>
+  <h1>Calculadora de Descuento Mínimo Posible</h1>
+
+  <form>
+    <label>Precio de venta actual: <input type="number" id="venta" /></label><br />
+    <label>Costo del producto: <input type="number" id="costo" /></label><br />
+    <button type="button" onclick="calcularDescuento()">Calcular</button>
+  </form>
+
+  <p id="resultado"></p>
+
+  <script>
+    function calcularDescuento() {
+      const venta = parseFloat(document.getElementById("venta").value);
+      const costo = parseFloat(document.getElementById("costo").value);
+
+      if (isNaN(venta) || isNaN(costo) || venta <= 0 || costo <= 0) {
+        document.getElementById("resultado").innerText = "Completá ambos campos correctamente.";
+        return;
+      }
+
+      if (costo >= venta) {
+        document.getElementById("resultado").innerText = "El costo no puede ser igual o mayor al precio de venta.";
+        return;
+      }
+
+      const porcentaje = ((venta - costo) / venta) * 100;
+      const maxDescuento = porcentaje.toFixed(2);
+
+      document.getElementById("resultado").innerText = `Podés ofrecer hasta un ${maxDescuento}% de descuento sin perder plata.`;
+    }
+  </script>
+</body>
+</html>
