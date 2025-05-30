@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulador de Reinversión</title>
+</head>
+<body>
+  <h1>Simulador de Reinversión</h1>
+  <p>Ingresá cuánto ganás por mes y mirá cuánto podrías reinvertir en tu negocio.</p>
+
+  <form id="formReinversion">
+    <label for="ganancia">Ganancia mensual ($):</label><br>
+    <input type="number" id="ganancia" required><br><br>
+
+    <button type="submit">Simular</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    document.getElementById("formReinversion").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const ganancia = parseFloat(document.getElementById("ganancia").value);
+
+      if (!isNaN(ganancia)) {
+        const porcentajes = [10, 25, 50, 70];
+        let html = "<h2>Sugerencias de reinversión</h2><ul>";
+        porcentajes.forEach(p => {
+          const reinversion = ganancia * (p / 100);
+          html += `<li>${p}% → $${reinversion.toFixed(2)}</li>`;
+        });
+        html += "</ul>";
+        document.getElementById("resultado").innerHTML = html;
+      } else {
+        document.getElementById("resultado").innerText = "Ingresá una ganancia válida.";
+      }
+    });
+  </script>
+</body>
+</html>
