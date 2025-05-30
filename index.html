@@ -94,3 +94,67 @@
 
 </body>
 </html>
+<!-- Agregamos esta nueva sección justo después del formulario básico que ya tenés -->
+
+<h2>Calculadora de pérdidas y ganancias</h2>
+
+<form id="perdidasGananciasForm">
+  <label for="costoTotal">Costo total (en $):</label>
+  <input type="number" id="costoTotal" min="0" step="any" required />
+
+  <label for="precioVenta">Precio de venta (en $):</label>
+  <input type="number" id="precioVenta" min="0" step="any" required />
+
+  <label for="cantidadVendida">Cantidad vendida:</label>
+  <input type="number" id="cantidadVendida" min="0" step="1" required />
+
+  <label for="gastosFijos">Gastos fijos mensuales (en $):</label>
+  <input type="number" id="gastosFijos" min="0" step="any" required />
+
+  <label for="gastosVariables">Gastos variables por unidad (en $):</label>
+  <input type="number" id="gastosVariables" min="0" step="any" required />
+
+  <button type="submit">Calcular resultado</button>
+</form>
+
+<div id="resultadoPerdidasGanancias" style="display:none; margin-top: 20px; padding: 15px; background:#e0f7fa; border:1px solid #00796b;"></div>
+
+<script>
+  const formPG = document.getElementById('perdidasGananciasForm');
+  const resultadoPG = document.getElementById('resultadoPerdidasGanancias');
+
+  formPG.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const costoTotal = parseFloat(document.getElementById('costoTotal').value);
+    const precioVenta = parseFloat(document.getElementById('precioVenta').value);
+    const cantidadVendida = parseInt(document.getElementById('cantidadVendida').value);
+    const gastosFijos = parseFloat(document.getElementById('gastosFijos').value);
+    const gastosVariables = parseFloat(document.getElementById('gastosVariables').value);
+
+    // Calculamos ingresos totales
+    const ingresos = precioVenta * cantidadVendida;
+
+    // Costos variables totales
+    const costosVariablesTotales = gastosVariables * cantidadVendida;
+
+    // Costos totales: costo total + gastos fijos + costos variables
+    const costosTotales = costoTotal + gastosFijos + costosVariablesTotales;
+
+    // Ganancia neta = ingresos - costos totales
+    const gananciaNeta = ingresos - costosTotales;
+
+    // Mostrar resultados
+    let mensaje = `Ingresos totales: $${ingresos.toFixed(2)}<br>`;
+    mensaje += `Costos totales: $${costosTotales.toFixed(2)}<br>`;
+
+    if (gananciaNeta >= 0) {
+      mensaje += `<strong>Ganancia neta: $${gananciaNeta.toFixed(2)}</strong>`;
+    } else {
+      mensaje += `<strong style="color:red;">Pérdida neta: $${Math.abs(gananciaNeta).toFixed(2)}</strong>`;
+    }
+
+    resultadoPG.innerHTML = mensaje;
+    resultadoPG.style.display = 'block';
+  });
+</script>
