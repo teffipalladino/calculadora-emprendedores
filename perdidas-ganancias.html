@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pérdidas y Ganancias</title>
+</head>
+<body>
+  <a href="index.html">← Volver al inicio</a>
+  <h1>Calculadora de Pérdidas y Ganancias</h1>
+
+  <form>
+    <label>Ingresos totales: <input type="number" id="ingresos" /></label><br />
+    <label>Egresos totales: <input type="number" id="egresos" /></label><br />
+    <button type="button" onclick="calcularResultado()">Calcular</button>
+  </form>
+
+  <p id="resultado"></p>
+
+  <script>
+    function calcularResultado() {
+      const ingresos = parseFloat(document.getElementById("ingresos").value);
+      const egresos = parseFloat(document.getElementById("egresos").value);
+      if (isNaN(ingresos) || isNaN(egresos)) {
+        document.getElementById("resultado").innerText = "Completá ambos campos.";
+        return;
+      }
+      const neto = ingresos - egresos;
+      const texto = neto >= 0 ? "Ganancia" : "Pérdida";
+      document.getElementById("resultado").innerText = `${texto}: $${Math.abs(neto)}`;
+    }
+  </script>
+</body>
+</html>
