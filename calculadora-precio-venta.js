@@ -1,37 +1,29 @@
 export function renderCalculadoraPrecioVenta(container) {
   container.innerHTML = `
-    <section class="wrapper style1">
-      <div class="inner">
-        <h2>Calculadora Precio de Venta</h2>
-        
-        <section>
-          <h3>Ingresá tus costos:</h3>
-          <div id="lista-costos" class="costos-list" style="margin-bottom: 1em;"></div>
-          <ul class="actions small">
-            <li><a href="#" id="agregarCostoBtn" class="button small icon solid fa-plus">Agregar otro costo</a></li>
-          </ul>
-          <p><strong>Costo total:</strong> $<span id="total-costos">0.00</span></p>
-        </section>
+    <h3>Ingresá tus costos:</h3>
+    <div id="lista-costos" style="margin-bottom: 1em;"></div>
+    <button id="agregarCostoBtn" class="button small">➕ Agregar otro costo</button>
+    <p style="margin-top:1em;">Costo total: $<span id="total-costos">0.00</span></p>
 
-        <section>
-          <h3>¿Querés aplicar margen de ganancia o markup?</h3>
-          <label><input type="radio" name="margenMarkup" value="margen" checked /> Margen de ganancia (%)</label><br/>
-          <label><input type="radio" name="margenMarkup" value="markup" /> Markup (%)</label><br/>
-          <input id="porcentajeGanancia" type="number" min="0" max="100" placeholder="Ej: 30" style="margin-top: 0.5em;" />
-          <p id="precioVentaResult"><strong>Precio de venta sugerido:</strong> $0.00</p>
-        </section>
+    <hr />
 
-        <section>
-          <h3>¿Necesitás sumar IVA?</h3>
-          <input id="ivaInput" type="number" min="0" max="100" placeholder="Ej: 21" />
-          <p id="precioConIvaResult"><strong>Precio final con IVA:</strong> $0.00</p>
-        </section>
+    <div>
+      <label><strong>¿Querés aplicar margen de ganancia o markup?</strong></label><br />
+      <label><input type="radio" name="margenMarkup" value="margen" checked /> Margen de ganancia (%)</label>
+      <label style="margin-left: 1em;"><input type="radio" name="margenMarkup" value="markup" /> Markup (%)</label><br />
+      <input id="porcentajeGanancia" type="number" min="0" max="100" placeholder="Ej: 30" class="input" />
+      <p id="precioVentaResult" style="margin-top:0.5em;"><strong>Precio de venta sugerido:</strong> $0.00</p>
+    </div>
 
-        <ul class="actions">
-          <li><a href="#" id="reiniciarBtn" class="button alt icon solid fa-trash">Borrar todo</a></li>
-        </ul>
-      </div>
-    </section>
+    <hr />
+
+    <div>
+      <label><strong>¿Necesitás sumar IVA?</strong></label><br />
+      <input id="ivaInput" type="number" min="0" max="100" placeholder="Ej: 21" class="input" />
+      <p id="precioConIvaResult" style="margin-top:0.5em;"><strong>Precio final con IVA:</strong> $0.00</p>
+    </div>
+
+    <button id="reiniciarBtn" class="button small" style="margin-top:1.5em;background:#ff5e5e;color:white;">Borrar todo</button>
   `;
 
   const listaCostos = container.querySelector('#lista-costos');
@@ -68,14 +60,14 @@ export function renderCalculadoraPrecioVenta(container) {
     } else {
       precioVenta = totalCostos * (1 + porcentaje / 100);
     }
-    precioVentaResult.innerHTML = `<strong>Precio de venta sugerido:</strong> $${formatearNumero(precioVenta)}`;
+    precioVentaResult.textContent = `Precio de venta sugerido: $${formatearNumero(precioVenta)}`;
     return precioVenta;
   }
 
   function calcularPrecioConIVA(precioVenta) {
     const iva = parseFloat(ivaInput.value) || 0;
     const precioConIVA = precioVenta * (1 + iva / 100);
-    precioConIvaResult.innerHTML = `<strong>Precio final con IVA:</strong> $${formatearNumero(precioConIVA)}`;
+    precioConIvaResult.textContent = `Precio final con IVA: $${formatearNumero(precioConIVA)}`;
   }
 
   function actualizarCalculos() {
@@ -85,28 +77,13 @@ export function renderCalculadoraPrecioVenta(container) {
 
   function agregarCosto(nombre = '', monto = '') {
     const div = document.createElement('div');
-    div.style.marginBottom = '0.5em';
-
-    const inputNombre = document.createElement('input');
-    inputNombre.type = 'text';
-    inputNombre.placeholder = 'Descripción (opcional)';
-    inputNombre.value = nombre;
-    inputNombre.style = 'margin-right: 1em; width: 40%;';
-
-    const inputMonto = document.createElement('input');
-    inputMonto.type = 'number';
-    inputMonto.min = '0';
-    inputMonto.step = '0.01';
-    inputMonto.placeholder = 'Monto $';
-    inputMonto.value = monto;
-    inputMonto.className = 'costo-input';
-    inputMonto.style = 'width: 20%;';
-    inputMonto.addEventListener('input', actualizarCalculos);
-
-    div.appendChild(inputNombre);
-    div.appendChild(inputMonto);
+    div.className = 'row';
+    div.innerHTML = `
+      <div class="col-6 col-12-small"><input type="text" placeholder="Descripción (opcional)" class="input" value="${nombre}"></div>
+      <div class="col-6 col-12-small"><input type="number" min="0" step="0.01" placeholder="Monto $" class="costo-input input" value="${monto}"></div>
+    `;
     listaCostos.appendChild(div);
-
+    div.querySelector('.costo-input').addEventListener('input', actualizarCalculos);
     actualizarCalculos();
   }
 
@@ -115,21 +92,15 @@ export function renderCalculadoraPrecioVenta(container) {
     porcentajeGananciaInput.value = '';
     ivaInput.value = '';
     totalCostosEl.textContent = '0.00';
-    precioVentaResult.innerHTML = '<strong>Precio de venta sugerido:</strong> $0.00';
-    precioConIvaResult.innerHTML = '<strong>Precio final con IVA:</strong> $0.00';
+    precioVentaResult.textContent = 'Precio de venta sugerido: $0.00';
+    precioConIvaResult.textContent = 'Precio final con IVA: $0.00';
     agregarCosto();
   }
 
-  agregarCostoBtn.addEventListener('click', e => {
-    e.preventDefault();
-    agregarCosto();
-  });
+  agregarCostoBtn.addEventListener('click', () => agregarCosto());
   porcentajeGananciaInput.addEventListener('input', actualizarCalculos);
   ivaInput.addEventListener('input', actualizarCalculos);
-  reiniciarBtn.addEventListener('click', e => {
-    e.preventDefault();
-    reiniciarFormulario();
-  });
+  reiniciarBtn.addEventListener('click', reiniciarFormulario);
   container.querySelectorAll('input[name="margenMarkup"]').forEach(radio => {
     radio.addEventListener('change', actualizarCalculos);
   });
