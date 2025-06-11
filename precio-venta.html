@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Calculadora Precio de Venta</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body class="is-preload">
+
+    <!-- Header -->
+    <header id="header">
+      <a href="index.html" class="logo">Volver al inicio</a>
+    </header>
+
+    <!-- Main -->
+    <section id="main" class="wrapper">
+      <div class="inner">
+        <header class="major">
+          <h2>Calculadora Precio de Venta</h2>
+          <p>Ingresá tus costos, elegí margen o markup, y calculá tu precio final.</p>
+        </header>
+        <div id="calculadora-container"></div>
+      </div>
+    </section>
+
+    <!-- Scripts Forty -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- Script de la calculadora -->
+    <script type="module">
+      import { renderCalculadoraPrecioVenta } from './assets/js/calculadora-precio-venta.js';
+      renderCalculadoraPrecioVenta(document.getElementById('calculadora-container'));
+    </script>
+
+  </body>
+</html>
