@@ -1,109 +1,64 @@
 export function renderCalculadoraPrecioVenta(container) {
   container.innerHTML = `
-    <h3>Ingresá tus costos:</h3>
-    <div id="lista-costos" style="margin-bottom: 1em;"></div>
-    <button id="agregarCostoBtn" class="button small">➕ Agregar otro costo</button>
-    <p style="margin-top:1em;">Costo total: $<span id="total-costos">0.00</span></p>
+    <form id="formulario" style="max-width: 500px; margin: auto;">
+      <label>
+        Costo del producto:
+        <input type="number" id="costo" step="0.01" style="color: black;" required />
+      </label>
 
-    <hr />
+      <fieldset style="margin: 1rem 0; padding: 1rem; border: 1px solid #ccc; border-radius: 8px;">
+        <legend><strong>Elegí cómo calcular la ganancia:</strong></legend>
+        <label style="display: block; margin-bottom: 0.5rem;">
+          <input type="radio" name="tipoMargen" value="venta" checked />
+          Margen sobre <strong>precio de venta</strong>
+        </label>
+        <label style="display: block;">
+          <input type="radio" name="tipoMargen" value="costo" />
+          Markup sobre <strong>costo</strong>
+        </label>
+      </fieldset>
 
-    <div>
-      <label><strong>¿Querés aplicar margen de ganancia o markup?</strong></label><br />
-      <label><input type="radio" name="margenMarkup" value="margen" checked /> Margen de ganancia (%)</label>
-      <label style="margin-left: 1em;"><input type="radio" name="margenMarkup" value="markup" /> Markup (%)</label><br />
-      <input id="porcentajeGanancia" type="number" min="0" max="100" placeholder="Ej: 30" class="input" />
-      <p id="precioVentaResult" style="margin-top:0.5em;"><strong>Precio de venta sugerido:</strong> $0.00</p>
-    </div>
+      <label>
+        Porcentaje (%):
+        <input type="number" id="porcentaje" step="0.01" style="color: black;" required />
+      </label>
 
-    <hr />
+      <button type="submit" style="margin-top: 1rem; background-color: #000; color: #fff; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer;">
+        Calcular precio de venta
+      </button>
+    </form>
 
-    <div>
-      <label><strong>¿Necesitás sumar IVA?</strong></label><br />
-      <input id="ivaInput" type="number" min="0" max="100" placeholder="Ej: 21" class="input" />
-      <p id="precioConIvaResult" style="margin-top:0.5em;"><strong>Precio final con IVA:</strong> $0.00</p>
-    </div>
-
-    <button id="reiniciarBtn" class="button small" style="margin-top:1.5em;background:#ff5e5e;color:white;">Borrar todo</button>
+    <div id="resultado" style="margin-top: 2rem; font-size: 1.2rem; color: black; text-align: center;"></div>
   `;
 
-  const listaCostos = container.querySelector('#lista-costos');
-  const totalCostosEl = container.querySelector('#total-costos');
-  const precioVentaResult = container.querySelector('#precioVentaResult');
-  const precioConIvaResult = container.querySelector('#precioConIvaResult');
-  const porcentajeGananciaInput = container.querySelector('#porcentajeGanancia');
-  const ivaInput = container.querySelector('#ivaInput');
-  const agregarCostoBtn = container.querySelector('#agregarCostoBtn');
-  const reiniciarBtn = container.querySelector('#reiniciarBtn');
+  document.getElementById('formulario').addEventListener('submit', function (e) {
+    e.preventDefault();
 
-  function formatearNumero(num) {
-    return num.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  }
+    const costo = parseFloat(document.getElementById('costo').value);
+    const porcentaje = parseFloat(document.getElementById('porcentaje').value);
+    const tipoMargen = document.querySelector('input[name="tipoMargen"]:checked').value;
+    const resultado = document.getElementById('resultado');
 
-  function calcularTotalCostos() {
-    let total = 0;
-    container.querySelectorAll('.costo-input').forEach(input => {
-      const val = parseFloat(input.value);
-      if (!isNaN(val)) total += val;
-    });
-    totalCostosEl.textContent = formatearNumero(total);
-    return total;
-  }
-
-  function calcularPrecioVenta() {
-    const totalCostos = calcularTotalCostos();
-    const porcentaje = parseFloat(porcentajeGananciaInput.value) || 0;
-    const tipo = container.querySelector('input[name="margenMarkup"]:checked').value;
-
-    let precioVenta = 0;
-    if (tipo === 'margen') {
-      precioVenta = totalCostos / (1 - porcentaje / 100);
-    } else {
-      precioVenta = totalCostos * (1 + porcentaje / 100);
+    if (isNaN(costo) || isNaN(porcentaje)) {
+      resultado.textContent = "Por favor completá ambos campos correctamente.";
+      return;
     }
-    precioVentaResult.textContent = `Precio de venta sugerido: $${formatearNumero(precioVenta)}`;
-    return precioVenta;
-  }
 
-  function calcularPrecioConIVA(precioVenta) {
-    const iva = parseFloat(ivaInput.value) || 0;
-    const precioConIVA = precioVenta * (1 + iva / 100);
-    precioConIvaResult.textContent = `Precio final con IVA: $${formatearNumero(precioConIVA)}`;
-  }
+    let precioVenta;
 
-  function actualizarCalculos() {
-    const precioVenta = calcularPrecioVenta();
-    calcularPrecioConIVA(precioVenta);
-  }
+    if (tipoMargen === 'venta') {
+      if (porcentaje >= 100) {
+        resultado.textContent = "El porcentaje no puede ser igual o mayor al 100% cuando es sobre venta.";
+        return;
+      }
+      precioVenta = costo / (1 - porcentaje / 100);
+    } else {
+      precioVenta = costo * (1 + porcentaje / 100);
+    }
 
-  function agregarCosto(nombre = '', monto = '') {
-    const div = document.createElement('div');
-    div.className = 'row';
-    div.innerHTML = `
-      <div class="col-6 col-12-small"><input type="text" placeholder="Descripción (opcional)" class="input" value="${nombre}"></div>
-      <div class="col-6 col-12-small"><input type="number" min="0" step="0.01" placeholder="Monto $" class="costo-input input" value="${monto}"></div>
-    `;
-    listaCostos.appendChild(div);
-    div.querySelector('.costo-input').addEventListener('input', actualizarCalculos);
-    actualizarCalculos();
-  }
-
-  function reiniciarFormulario() {
-    listaCostos.innerHTML = '';
-    porcentajeGananciaInput.value = '';
-    ivaInput.value = '';
-    totalCostosEl.textContent = '0.00';
-    precioVentaResult.textContent = 'Precio de venta sugerido: $0.00';
-    precioConIvaResult.textContent = 'Precio final con IVA: $0.00';
-    agregarCosto();
-  }
-
-  agregarCostoBtn.addEventListener('click', () => agregarCosto());
-  porcentajeGananciaInput.addEventListener('input', actualizarCalculos);
-  ivaInput.addEventListener('input', actualizarCalculos);
-  reiniciarBtn.addEventListener('click', reiniciarFormulario);
-  container.querySelectorAll('input[name="margenMarkup"]').forEach(radio => {
-    radio.addEventListener('change', actualizarCalculos);
+    resultado.textContent = `Precio de venta sugerido: $${precioVenta.toLocaleString('es-AR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })}`;
   });
-
-  reiniciarFormulario();
 }
