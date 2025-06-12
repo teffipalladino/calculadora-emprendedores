@@ -1,0 +1,94 @@
+/* === ESTILOS GENERALES === */
+body {
+  background-color: #1f2544;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+/* === INPUTS === */
+.input {
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1em;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+/* === BOTÓN PRINCIPAL === */
+.button {
+  background-color: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+  display: inline-block;
+}
+
+.button:hover {
+  background-color: #333333;
+}
+
+/* === GRUPO DE OPCIONES (MARGEN O MARKUP) === */
+.options-group {
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.options-group label {
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* === RESULTADOS === */
+#precioVentaResult,
+#precioConIvaResult {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* === ETIQUETAS === */
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.95em;
+}
+
+/* === CONTENEDORES === */
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+h1, h2, h3 {
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+}
