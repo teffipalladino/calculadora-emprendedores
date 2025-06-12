@@ -62,25 +62,45 @@ body.venta-objetivo button:hover {
 }
 
 /* === Calculadora Ganancia Neta === */
-body.ganancia-neta {
-  background-color: #FFF6E5;
+/* === Estilo específico para inputs y resultados en Ganancia Neta === */
+body.ganancia-neta input {
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: 500;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
 }
 
-body.ganancia-neta h1 {
-  color: #D97E00;
-  font-weight: 600;
+/* Para mostrar los resultados en caja blanca con texto negro */
+#precioVentaResult,
+#precioConIvaResult {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 10px;
 }
 
-body.ganancia-neta a {
-  color: #D97E00;
+/* Opciones de cálculo (radio buttons o similares) */
+.options-group {
+  border: 1px solid #D97E00;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 
-body.ganancia-neta button {
-  background-color: #D97E00;
-}
-
-body.ganancia-neta button:hover {
-  background-color: #A65E00;
+.options-group label {
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 /* === Calculadora Pérdidas y Ganancias === */
