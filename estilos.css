@@ -63,7 +63,7 @@ body.venta-objetivo button:hover {
 
 /* === Calculadora Ganancia Neta === */
 /* === Estilo específico para inputs y resultados en Ganancia Neta === */
-body.ganancia-neta input {
+body.precio-venta input {
   background-color: #ffffff;
   color: #000000;
   font-weight: 500;
