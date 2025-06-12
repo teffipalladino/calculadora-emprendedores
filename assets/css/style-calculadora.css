@@ -92,3 +92,10 @@ h1, h2, h3 {
     padding: 10px;
   }
 }
+.options-group label {
+  margin-bottom: 8px;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
